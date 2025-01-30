@@ -12,14 +12,14 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('https://expensetracker-nx9c.onrender.com')
+      .get('https://expensetracker-nx9c.onrender.com/api/expenses')
       .then((res) => setTransactions(res.data))
       .catch((err) => console.error('Error fetching transactions:', err));
   }, []);
 
   const onAddTransaction = (data) => {
     axios
-      .post('https://expensetracker-nx9c.onrender.com', data) 
+      .post('https://expensetracker-nx9c.onrender.com/api/expenses', data) 
       .then((res) => {
         setTransactions([...transactions, res.data]); 
       })
@@ -29,7 +29,7 @@ function App() {
   const onDeleteTransaction = (id) => {
     console.log('Deleting transaction with ID:', id);
     axios
-      .delete(`https://expensetracker-nx9c.onrender.com/${id}`) 
+      .delete(`https://expensetracker-nx9c.onrender.com/api/expenses/${id}`) 
       .then(() => {
         console.log('Transaction deleted successfully');
         setTransactions(transactions.filter((transaction) => transaction.id !== id)); 
